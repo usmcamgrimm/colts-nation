@@ -1,3 +1,19 @@
+/* COLORS */
+/*
+Speed Blue: 
+  #013369
+  rgb (1, 51, 105)
+White:  
+  #ffffff
+  rgb (255, 255, 255)
+Facemask Gray:  
+  #a5acaf
+  rgb (165, 172, 175)
+Anvil Black:
+  #10252c
+  rgb (29, 37, 44)
+*/
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -5,4 +21,61 @@
 }
 html {
   background: #ffffff;
+}
+
+h1 {
+  font-family: Inter;
+  text-align: center;
+  color: #013369;
+  font-size: 2.2rem;
+  text-shadow: 0 2px 3px rgba(29,37,44,0.3);
+  margin-top: 3rem;
+  z-index: 99;
+}
+.modalForm {
+  margin-top: -1.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+button.activate {
+  background: none;
+  border: none;
+  color: #013369;
+  font-family: Inter;
+  font-size: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+button.activate:hover {
+  color: #10252c;
+  border-bottom: 1px solid #10252c;
+}
+.modal {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 600px;
+  background-color: #a5acaf;
+  visibility: hidden;
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #013369;
+  padding: 1rem;
+  width: 400px;
+  border-radius: 6px;
+}
+.closeBtn {
+  background-color: #ce1126;
+}
+.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
