@@ -24,19 +24,19 @@ html {
 }
 
 h1 {
-  font-family: Inter;
+  font-family: 'Goblin One';
   text-align: center;
   color: #013369;
   font-size: 2.2rem;
   text-shadow: 0 2px 3px rgba(29,37,44,0.3);
-  margin-top: 3rem;
-  z-index: 99;
+  margin-left: 200px;
 }
-.modalForm {
-  margin-top: -1.8rem;
+.modalHeader {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
 }
 button.activate {
   background: none;
@@ -44,30 +44,32 @@ button.activate {
   color: #013369;
   font-family: Inter;
   font-size: 1rem;
-  display: flex;
-  justify-content: flex-end;
+  margin-right: 250px;
 }
 button.activate:hover {
   color: #10252c;
   border-bottom: 1px solid #10252c;
 }
 .modal {
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  height: 600px;
+  height: 450px;
   background-color: #a5acaf;
   visibility: hidden;
   transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
 }
 .login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: #013369;
   padding: 1rem;
   width: 400px;
+  height: 450px;
   border-radius: 6px;
 }
 .closeBtn {
