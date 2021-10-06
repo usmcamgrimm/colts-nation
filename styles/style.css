@@ -21,8 +21,12 @@ Anvil Black:
 }
 html {
   background: #ffffff;
+  font-family: 'Inter', sans-serif;
+  color: rgb(29, 37, 44);
 }
-
+header {
+  margin-bottom: 24px;
+}
 h1 {
   font-family: 'Goblin One';
   text-align: center;
@@ -80,4 +84,9 @@ button.activate:hover {
   visibility: visible;
   transform: scale(1.0);
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+hr.topBorder {
+  border-bottom: 2px solid rgb(1, 51, 105);
+  width: 73%;
+  margin: 0 auto;
 }
