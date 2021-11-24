@@ -26,6 +26,8 @@ html {
 }
 header {
   margin-bottom: 24px;
+  align-items: center;
+  margin-top: 2rem;
 }
 h1 {
   font-family: 'Goblin One';
@@ -33,14 +35,6 @@ h1 {
   color: #013369;
   font-size: 2.2rem;
   text-shadow: 0 2px 3px rgba(29,37,44,0.3);
-  margin-left: 200px;
-}
-.modalHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
 }
 button.activate {
   background: none;
