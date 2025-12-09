@@ -20,6 +20,8 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 # Use httParty for external API calls
 gem 'httparty', '~> 0.23.2'
+# CORS Compatibility
+gem 'rack-cors', '~> 3.0'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
