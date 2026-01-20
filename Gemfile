@@ -19,7 +19,7 @@ gem "tailwindcss-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 # Use httParty for external API calls
-gem 'httparty', '~> 0.24.0'
+gem 'httparty', '~> 0.24.2'
 # CORS Compatibility
 gem 'rack-cors', '~> 3.0'
 
