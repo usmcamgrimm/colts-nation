@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "players#idex"
+  root "players#index"
 
   resources :players, only: [ :index, :show ]
 
