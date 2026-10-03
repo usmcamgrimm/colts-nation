@@ -23,15 +23,16 @@ module ColtsNation
       Result.new(players: [], error: :network_error)
     end
 
-    def self.seasons
+    def self.fetch_seasons
       Rails.cache.fetch("colts_nation:seasons", expires_in: 1.hour) do
         response = get("/api/v1/seasons", format: :json)
         if response.success?
           Result.new(seasons: response.parsed_response)
         else
           Rails.logger.warn("[ColtsNation] upstream #{response.code}")
+          nil
         end
-      end || Result.new(players: [], error: :upstream_error)
+      end || Result.new(seasons: [], error: :upstream_error)
     rescue HTTParty::Error, SocketError, Net::OpenTimeout, Net::ReadTimeout, Errno::ECONNREFUSED => e
       Rails.logger.warn("[ColtsNation] network error: #{e.class}: #{e.message}")
       Result.new(seasons: [], error: :network_error)
