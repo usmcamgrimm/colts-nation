@@ -9,30 +9,42 @@ module ColtsNation
     end
 
     def self.fetch_players
-      Rails.cache.fetch("colts_nation:players", expires_in: 1.hour) do
-        response = get("#{BASE_URI}/api/v1/players", format: :json)
-        if response.success?
-          Result.new(players: response.parsed_response)
-        else
-          Rails.logger.warn("[ColtsNation] upstream #{response.code}")
-          nil
-        end
-      end || Result.new(players: [], error: :upstream_error)
+      cache_key = "colts_nation:players"
+
+      cached_result = Rails.cache.read(cache_key)
+      return cached_result if cached_result&.success?
+
+      response = get("#{BASE_URI}/api/v1/players", format: :json)
+
+      if response.success?
+        result = Result.new(players: response.parsed_response)
+        Rails.cache.write(cache_key, result, expires_in: 1.hour)
+        result
+      else
+        Rails.logger.warn("[ColtsNation] upstream error code: #{response.code}")
+        Result.new(players: [], error: :upstream_error)
+      end
     rescue StandardError => e
       Rails.logger.warn("[ColtsNation] network error: #{e.class}: #{e.message}")
       Result.new(players: [], error: :network_error)
     end
 
-    def self.fetch_seasons
-      Rails.cache.fetch("colts_nation:seasons", expires_in: 1.hour) do
-        response = get("#{BASE_URI}/api/v1/seasons", format: :json)
-        if response.success?
-          Result.new(seasons: response.parsed_response)
-        else
-          Rails.logger.warn("[ColtsNation] upstream #{response.code}")
-          nil
-        end
-      end || Result.new(seasons: [], error: :upstream_error)
+    def self.seasons
+      cache_key = "colts_nation:seasons"
+
+      cached_result = Rails.cache.read(cache_key)
+      return cached_result if cached_result&.success?
+
+      response = get("#{BASE_URI}/api/v1/seasons", format: :json)
+
+      if response.success?
+        result = Result.new(seasons: response.parsed_response)
+        Rails.cache.write(cache_key, result, expires_in: 1.hour)
+        result
+      else
+        Rails.logger.warn("[ColtsNation] upstream error code: #{response.code}")
+        Result.new(seasons: [], error: :upstream_error)
+      end
     rescue StandardError => e
       Rails.logger.warn("[ColtsNation] network error: #{e.class}: #{e.message}")
       Result.new(seasons: [], error: :network_error)

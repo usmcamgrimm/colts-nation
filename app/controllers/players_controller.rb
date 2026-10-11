@@ -1,20 +1,17 @@
 class PlayersController < ApplicationController
   def index
-    result = ColtsNation::ApiClient.fetch_players
+    @result = ColtsNation::ApiClient.fetch_players
 
-    if @result.success?
+    if @result&.success?
       @players = @result.players
     else
       @players = []
       error_type = @result&.error || :network_error
 
-      flash.now[:alert] = case @result.error
-      when :upstream_error
-        "The Colts API experienced a problem. Please try your request again."
-      when :network_error
-        "Unable to connect to the Colts API."
+      flash[:alert] = if error_type == :upstream_error
+        "Unable to process your request. Please try again."
       else
-        "An unexpected error occurred."
+        "Unable to connect to the Colts API."
       end
     end
   end
