@@ -29,7 +29,7 @@ module ColtsNation
       Result.new(players: [], error: :network_error)
     end
 
-    def self.seasons
+    def self.fetch_seasons
       cache_key = "colts_nation:seasons"
 
       cached_result = Rails.cache.read(cache_key)
