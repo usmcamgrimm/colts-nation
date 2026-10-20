@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-speed-blue: #013369;
+  --color-colts-white: #ffffff;
+  --color-facemask-gray: #a5acaf;
+  --color-anvil-black: #10252c;
+
+  /* Fonts */
+  --font-title: 'Prompt', sans-serif;
+  --font-main: 'Nokora', sans-serif;
+}
