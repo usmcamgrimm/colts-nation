@@ -1,8 +1,14 @@
-<div class="max-w-7xl mx-auto">
-  <%= @players_by_status.each do |status, players| %>
+<div class="max-w-7xl mx-auto mt-6">
+  <% @players.each do |status, players| %>
     <% next if players.blank? %>
 
-    <section class="my-5">
-      <h2 class="font-main text-2xl text-speed-blue my-6"><%= player_status(status) %>
+    <section class="mt-0 mb-5">
+      <h2 class="font-main text-2xl text-speed-blue my-6"><%= player_status(status) %></h2>
+
+      <% players.each do |player| %>
+        <p class="text-bold text-xl"><%= player["name"] %></p>
+      <% end %>
     </section>
+
+  <% end %>
 </div>
