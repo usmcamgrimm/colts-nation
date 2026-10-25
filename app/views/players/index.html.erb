@@ -1,14 +1,55 @@
-<div class="max-w-7xl mx-auto mt-6">
+<div class="max-w-8xl mx-auto mt-6">
   <% @players.each do |status, players| %>
     <% next if players.blank? %>
 
     <section class="mt-0 mb-5">
-      <h2 class="font-main text-2xl text-speed-blue my-6"><%= player_status(status) %></h2>
+      <h2 class="text-3xl text-speed-blue my-6"><%= player_status(status) %></h2>
 
-      <% players.each do |player| %>
-        <p class="text-bold text-xl"><%= player["name"] %></p>
-      <% end %>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% players.each do |player| %>
+          <% latest_stat = player["season_stats"]&.max_by { |s| s["year"].to_i } || player["season_stats"]&.first || {} %>
+          <% exp = latest_stat["exp"] %>
+
+          <%# Player Cards %>
+          <div class="w-full bg-white rounded-lg border border-speed-blue shadow-md hover:shadow-lg transition-shadow duration-200 p-5 flex items-center gap-5">
+            
+            <%# Player Images %>
+            <div class="w-[150px] h-[100px] flex-shrink-0 flex items-center justify-center overflow-hidden">
+              <% if player["photo"].present? %>
+                <%= image_tag player["photo"], alt: player["name"], class: "w-full h-full object-contain" %>
+              <% else %>
+                <span class="text-xs text-anvil-black">No Photo</span>
+              <% end %>
+            </div>
+
+            <%# Player Details %>
+            <div class="flex-1 min-w-0 text-left">
+              <%# Name %>
+              <h3 class="text-xl font-bold text-speed-blue leading-snug">
+                <%= player["name"] %>
+              </h3>
+
+              <%# Number - Position %>
+              <p class="anvil-black my-1">
+                <%= latest_stat["number"].presence || "--" %> &bull; <%= latest_stat["position"].presence || "--" %>
+              </p>
+
+              <%# College %>
+              <% if player["college"].present? %>
+                <p class="text-sm anvil-black">
+                  College: <%= player["college"] %>
+                </p>
+              <% end %>
+
+              <%# Experience %>
+              <p class="text-sm anvil-black">
+                Experience: <%= exp.to_i == 0 ? "Rookie" : "#{exp} yrs" %>
+              </p>
+            </div>
+
+          </div>
+        <% end %>
+      </div>
     </section>
-
   <% end %>
 </div>
