@@ -3,7 +3,7 @@
     <% next if players.blank? %>
 
     <section class="mt-0 mb-5">
-      <h2 class="text-3xl text-speed-blue my-6"><%= player_status(status) %></h2>
+      <h2 class="text-3xl my-6"><%= player_status(status) %></h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <% players.each do |player| %>
@@ -18,7 +18,7 @@
               <% if player["photo"].present? %>
                 <%= image_tag player["photo"], alt: player["name"], class: "w-full h-full object-contain" %>
               <% else %>
-                <span class="text-xs text-anvil-black">No Photo</span>
+                <span class="text-xs">No Photo</span>
               <% end %>
             </div>
 
@@ -30,19 +30,19 @@
               </h3>
 
               <%# Number - Position %>
-              <p class="anvil-black my-1">
+              <p class="my-1">
                 <%= latest_stat["number"].presence || "--" %> &bull; <%= latest_stat["position"].presence || "--" %>
               </p>
 
               <%# College %>
               <% if player["college"].present? %>
-                <p class="text-sm anvil-black">
+                <p class="text-sm">
                   College: <%= player["college"] %>
                 </p>
               <% end %>
 
               <%# Experience %>
-              <p class="text-sm anvil-black">
+              <p class="text-sm">
                 Experience: <%= exp.to_i == 0 ? "Rookie" : "#{exp} yrs" %>
               </p>
             </div>
