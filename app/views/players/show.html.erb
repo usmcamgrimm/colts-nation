@@ -1,0 +1,88 @@
+<%# app/views/players/show.html.erb %>
+<div class="w-full max-w-[1536px] mx-auto px-4 sm:px-6 py-6 font-main">
+
+  <div class="mb-6">
+    <%= link_to "&larr; Back to Roster".html_safe, players_path, class: "text-speed-blue font-semibold hover:underline" %>
+  </div>
+
+  <% latest_stat = @player["season_stats"]&.max_by { |s| s["year"].to_i } || @player["season_stats"]&.first || {} %>
+  <% exp = latest_stat["exp"] %>
+
+  <section class="flex flex-col md:flex-row items-center md:items-center justify-center gap-6 lg:gap-12 py-4">
+    
+    <%# Player Image %>
+    <div class="w-[200px] h-[133px] md:w-[300px] md:h-[200px] lg:w-[300px] lg:h-[200px] flex-shrink-0 flex items-center justify-center overflow-hidden">
+      <% if @player["photo"].present? %>
+        <%= image_tag @player["photo"], alt: @player["name"], class: "w-full h-full object-contain" %>
+      <% else %>
+        <span class="text-sm text-slate-400">No Photo Available</span>
+      <% end %>
+    </div>
+
+    <%# Player Details %>
+    <div class="text-center md:text-left space-y-2 lg:space-y-4">
+      <h2 class="font-title text-2xl md:text-3xl lg:text-4xl text-speed-blue">
+        <%= @player["name"] %>
+      </h2>
+
+      <p class="font-title text-xl md:text-2xl lg:text-2xl">
+        <%= latest_stat["number"].presence || "--" %> &bull; <%= latest_stat["position"].presence || "--" %>
+      </p>
+
+      <% if @player["college"].present? %>
+        <p class="text-base md:text-2xl lg:text-2xl">
+          <span class="font-semibold">College:</span> <%= @player["college"] %>
+        </p>
+      <% end %>
+
+      <p class="text-base md:text-2xl lg:text-2xl">
+        <span class="font-semibold">Experience:</span> <%= exp == 0 ? "Rookie" : "#{exp} seasons" %>
+      </p>
+    </div>
+
+  </section>
+
+  <div class="w-[80%] mx-auto my-8 border-t border-facemask-gray/25"></div>
+
+  <%# Season Stats Section %>
+  <section class="max-w-4xl mx-auto py-4">
+    <h2 class="font-title text-2xl md:text-3xl text-speed-blue mb-6 text-center md:text-left">
+      Season Stats
+    </h2>
+
+    <% if @player["season_stats"].present? %>
+      <div class="space-y-6">
+        <% @player["season_stats"].each do |stat| %>
+          <div class="bg-facemask-gray/7 p-6 rounded-lg space-y-4">
+            <h3 class="font-title text-xl mb-3">
+              <%= stat["year"] %> Season
+            </h3>
+
+            <% categories = stat_keys_order(stat["position"] || latest_stat["position"], stat) %>
+
+            <% categories.each do |category_name, keys| %>
+              <div class="space-y-2">
+                <h4 class="text-sm font-bold tracking-wider uppercase mt-3">
+                  <%= category_name %>
+                </h4>
+
+                <div class="grid grid-cols-2 gap-4 text-sm md:text-base">
+                  <% keys.each do |key| %>
+                    <div class="flex justify-between border-b border-facemask-gray/40 pb-1 pr-2">
+                      <span><%= display_stat_labels(key) %>:</span>
+                      <span class="font-semibold"><%= stat[key].presence || "0" %></span>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="italic text-center md:text-left">No stats available for <%= @player["name"] %>.</p>
+    <% end %>
+  </section>
+
+</div>

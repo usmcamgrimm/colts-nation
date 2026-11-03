@@ -19,4 +19,16 @@ class PlayersController < ApplicationController
       end
     end
   end
+
+  def show
+    @result = ColtsNation::ApiClient.fetch_players
+
+    if @result&.success?
+      @player = @result.players.find do |player|
+        player["name"]&.parameterize == params[:id]
+      end
+    end
+
+    redirect_to players_path, alert: "Player not found." unless @player
+  end
 end
