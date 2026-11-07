@@ -1,4 +1,72 @@
-<div>
-  <h1 class="font-bold text-4xl">Seasons#index</h1>
-  <p>Find me in app/views/seasons/index.html.erb</p>
+<div class="max-w-full mx-auto py-8 px-4">
+
+  <% if @seasons.present? %>
+    <div class="space-y-10">
+      <% @seasons.each do |year, games| %>
+        <h2 class="font-title text-3xl md:text-4xl text-speed-blue mb-8 text-center">
+          <%= year %> Regular Season
+        </h2>
+        <div class="p-6 md:p-8 space-y-6">
+
+          <div class="space-y-6">
+            <% games.each_with_index do |game, index| %>
+              <% unless index == 0 %>
+                <hr class="border-facemask-gray/45 my-4">
+              <% end %>
+
+              <div class="py-2 flex flex-col space-y-2 text-base md:text-lg">
+
+                <div class="text-lg font-semibold">
+                  <span class="text-speed-blue">Week <%= game["week"] || game[:week] %></span> • <span class="font-normal"><%= game["gamedate"] || game[:gamedate] %></span>
+                </div>
+
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+                  <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                    <span class="text-sm font-bold px-2.5 py-1">
+                      <%= (game["location"] || game[:location]) == "home" ? "vs" : "@" %>
+                    </span>
+
+                    <div class="flex items-center gap-3">
+                      <% img_src = game["oppimage"] || game[:oppimage] %>
+                      <% if img_src.present? %>
+                        <img src="<%= img_src %>" alt="" class="w-12 h-12 object-contain">
+                      <% end %>
+                      <span class="font-semibold text-lg"><%= game["oppname"] || game[:oppname] %></span>
+                    </div>
+
+                    <div class="flex items-center gap-3 font-bold">
+                      <% res = game["result"] || game[:result] %>
+                      <span class="<%= res == 'W' ? 'text-green-600' : 'text-red-600' %>">
+                        <%= res %>
+                      </span>
+                      <span class="font-normal"><%= game["score"] || game[:score] %></span>
+                    </div>
+                  </div>
+
+                  <div class="text-sm md:text-base md:text-right font-medium">
+                  <% map_url = game["map"] || game[:map] %>
+                  <% stadium_name = game["stadium"] || game[:stadium] %>
+
+                  <% if map_url.present? %>
+                    <a href="<%= map_url %>" target="_blank" rel="noopener noreferrer" class="text-speed-blue hover:underline">
+                      <%= stadium_name %>
+                    </a>
+                  <% else %>
+                    <span class="text-slate-600"><%= stadium_name %></span>
+                  <% end %>
+                  </div>
+
+                </div>
+
+              </div>
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="italic">No schedule data available.</p>
+  <% end %>
 </div>
