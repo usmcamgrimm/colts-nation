@@ -3,7 +3,15 @@ class SeasonsController < ApplicationController
     @result = ColtsNation::ApiClient.fetch_seasons
 
     if @result&.success?
-      @seasons = @result.seasons
+      raw_schedule = @result.seasons || @result["seasons"] || []
+
+      schedule = raw_schedule.uniq do |game|
+        [ game["year"] || game[:year], game["week"] || game[:week] ]
+      end
+
+      @seasons = schedule.group_by { |game| game["year"] || game[:year] }
+        .sort_by { |year, _| year.to_i }
+        .reverse
     else
       @seasons = []
       error_type = @result&.error || :network_error
