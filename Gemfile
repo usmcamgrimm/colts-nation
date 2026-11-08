@@ -1,26 +1,26 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.3", ">= 8.1.3.1"
+gem "rails", ">= 8.1.4.1"
 # JSON
-gem "json", "~> 2.8"
+gem "json", ">= 3.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
-gem "propshaft"
+gem "propshaft", ">= 1.3.2"
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem "pg", ">= 1.7"
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+gem "puma", ">= 8.0.2"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+gem "importmap-rails", ">= 2.2.3"
+# Hotwire"s SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails", ">= 2.0.23"
+# Hotwire"s modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails", ">= 1.3.4"
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
-gem "tailwindcss-rails"
+gem "tailwindcss-rails", ">= 4.7"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
-gem "httparty", ">= 0.24.2"
+gem "jbuilder", ">= 2.15.1"
+gem "httparty", ">= 0.24.3"
 gem "dotenv-rails", ">= 3.2"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
@@ -30,9 +30,9 @@ gem "dotenv-rails", ">= 3.2"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
-gem "solid_cache"
-gem "solid_queue"
-gem "solid_cable"
+gem "solid_cache", ">= 1.0.10"
+gem "solid_queue", ">= 1.7.2"
+gem "solid_cable", ">= 4.1"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -44,7 +44,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem "image_processing", ">= 2.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
