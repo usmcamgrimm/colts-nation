@@ -17,11 +17,11 @@ module PlayersHelper
   end
 
   STAT_CATEGORIES = {
-    "Passing" => %w[pass_att comp comp_pct pass_yards pass_td pass_long sacked int qb_rtng],
-    "Rushing" => %w[rush_att rush_yds rush_ypc rush_long rush_td],
-    "Receiving" => %w[rec rec_yds rec_ypc rec_long rec_td],
-    "Defense" => %w[tackles solo_tackles assist def_sacks def_fumble def_int def_td],
-    "Kicking" => %w[fg_1to19 fg_20to29 fg_30to39 fg_40to49 fg_50to59 fg_60Plus],
+    "Passing" => %w[games pass_att comp comp_pct pass_yards pass_ypg pass_td pass_long sacked int qb_rtng],
+    "Rushing" => %w[rush_att rush_yds rush_ypc rush_ypg rush_long rush_td off_fumble],
+    "Receiving" => %w[rec_targets rec rec_yds rec_ypc rec_yac rec_long rec_td off_fumble],
+    "Defense" => %w[tackles solo_tackles assist tackles_loss def_sacks def_fumble def_int def_td],
+    "Kicking" => %w[fg_1to19 fg_20to29 fg_30to39 fg_40to49 fg_50to59 fg_60Plus xp_att xp_made],
     "Punting" => %w[punt punt_yards punt_in20 pung_avg punt_lng],
     "Kick Returns" => %w[kr_ret kr_fc kr_yds kr_yds_ret kr_lng kr_td],
     "Punt Returns" => %w[pr_ret pr_fc pr_yds pr_yds_ret pr_lng pr_td]
@@ -41,10 +41,12 @@ module PlayersHelper
 
   STAT_KEY_LABELS = {
     # Passing
+    "games" => "G",
     "pass_att" => "ATT",
     "comp" => "COMP",
     "comp_pct" => "COMP%",
     "pass_yards" => "YDS",
+    "pass_ypg" => "YPG",
     "pass_long" => "LNG",
     "pass_td" => "TD",
     "sacked" => "SACK",
@@ -55,20 +57,26 @@ module PlayersHelper
     "rush_att" => "ATT",
     "rush_yds" => "YDS",
     "rush_ypc" => "YPC",
+    "rush_ypg" => "YPG",
     "rush_long" => "LNG",
     "rush_td" => "TD",
+    "off_fumble" => "FUM",
 
     # Receiving
+    "rec_targets" => "TGT",
     "rec" => "REC",
     "rec_yds" => "YDS",
     "rec_ypc" => "YPC",
+    "rec_yac" => "YAC",
     "rec_long" => "LNG",
     "rec_td" => "TD",
+    "off_fumbles" => "FUM",
 
     # Defense
     "tackles" => "COMB",
     "solo_tackles" => "SOLO",
     "assist" => "AST",
+    "tackles_loss" => "TFL",
     "def_sacks" => "SACK",
     "def_fumble" => "FF",
     "def_int" => "INT",
@@ -81,6 +89,8 @@ module PlayersHelper
     "fg_40to49" => "40-49",
     "fg_50to59" => "50-59",
     "fg_60Plus" => "60+",
+    "xp_att" => "XPA",
+    "xo_made" => "XPM",
 
     # Punting
     "punt" => "PUNTS",
