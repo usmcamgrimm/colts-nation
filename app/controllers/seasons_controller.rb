@@ -6,10 +6,10 @@ class SeasonsController < ApplicationController
       raw_schedule = @result.seasons || @result["seasons"] || []
 
       schedule = raw_schedule.uniq do |game|
-        [ game["year"] || game[:year], game["week"] || game[:week] ]
+        [ game["year"], game["week"] ]
       end
 
-      @seasons = schedule.group_by { |game| game["year"] || game[:year] }
+      @seasons = schedule.group_by { |game| game["year"] }
         .sort_by { |year, _| year.to_i }
         .reverse
     else

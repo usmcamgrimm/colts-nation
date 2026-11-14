@@ -17,36 +17,37 @@
               <div class="py-2 flex flex-col space-y-2 text-base md:text-lg">
 
                 <div class="text-xl font-semibold">
-                  <span class="text-speed-blue">Week <%= game["week"] || game[:week] %></span> • <span class="font-normal"><%= game["gamedate"] || game[:gamedate] %></span>
+                  <span class="text-speed-blue">Week <%= game["week"] %></span> • <span class="font-normal"><%= game["gamedate"] %></span>
                 </div>
 
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
                   <div class="flex flex-wrap items-center gap-x-2 gap-y-2">
                     <span class="text-md font-bold px-2.5 py-1">
-                      <%= (game["location"] || game[:location]) == "home" ? "vs" : "@" %>
+                      <%= (game["location"]) == "home" ? "vs" : "@" %>
                     </span>
 
                     <div class="flex items-center gap-3">
-                      <% img_src = game["oppimage"] || game[:oppimage] %>
+                      <% img_src = game["oppimage"] %>
                       <% if img_src.present? %>
                         <img src="<%= img_src %>" alt="" class="w-14 h-14 object-contain">
                       <% end %>
-                      <span class="font-semibold text-xl"><%= game["oppname"] || game[:oppname] %></span>
+                      <span class="font-semibold text-xl"><%= game["oppcity"] %></span>
+                      <span class="font-semibold text-xl pr-4"><%= game["oppname"] %></span>
                     </div>
 
-                    <div class="flex items-center gap-3 font-bold">
-                      <% res = game["result"] || game[:result] %>
+                    <div class="flex items-center gap-3  font-bold">
+                      <% res = game["result"] %>
                       <span class="<%= res == 'W' ? 'text-green-600' : 'text-red-600' %> text-xl">
                         <%= res %>
                       </span>
-                      <span class="font-normal text-xl"><%= game["score"] || game[:score] %></span>
+                      <span class="font-normal text-xl"><%= game["score"] %></span>
                     </div>
                   </div>
 
                   <div class="text-sm md:text-base md:text-right font-medium">
-                  <% map_url = game["map"] || game[:map] %>
-                  <% stadium_name = game["stadium"] || game[:stadium] %>
+                  <% map_url = game["map"] %>
+                  <% stadium_name = game["stadium"] %>
 
                   <% if map_url.present? %>
                     <a href="<%= map_url %>" target="_blank" rel="noopener noreferrer" class="text-xl text-speed-blue hover:underline">
@@ -67,6 +68,6 @@
       <% end %>
     </div>
   <% else %>
-    <p class="italic">No schedule data available.</p>
+    <p class="italic text-center">No schedule data available.</p>
   <% end %>
 </div>
