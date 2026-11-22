@@ -19,11 +19,11 @@ module PlayersHelper
   STAT_CATEGORIES = {
     "Passing" => %w[games pass_att comp comp_pct pass_yards pass_ypg pass_td pass_long sacked int qb_rtng],
     "Rushing" => %w[rush_att rush_yds rush_ypc rush_ypg rush_long rush_td off_fumble],
-    "Receiving" => %w[rec_targets rec rec_yds rec_ypc rec_yac rec_long rec_td off_fumble],
-    "Defense" => %w[tackles solo_tackles assist tackles_loss def_sacks def_fumble def_int def_td],
-    "Kicking" => %w[fg_1to19 fg_20to29 fg_30to39 fg_40to49 fg_50to59 fg_60Plus xp_att xp_made],
-    "Punting" => %w[punt punt_yards punt_in20 pung_avg punt_lng],
-    "Kick Returns" => %w[kr_ret kr_fc kr_yds kr_yds_ret kr_lng kr_td],
+    "Receiving" => %w[rec_targets rec rec_yds rec_ypc rec_yac rec_long rec_ypg rec_td off_fumble],
+    "Defense" => %w[tackles solo_tackles assist tackles_loss def_sacks pass_def def_fumble fumble_rec def_int def_td],
+    "Kicking" => %w[fg_att fg_made fg_1to19 fg_20to29 fg_30to39 fg_40to49 fg_50to59 fg_60Plus xp_att xp_made],
+    "Punting" => %w[punt punt_yards punt_in20 pung_avg punt_lng blocked],
+    "Kick Returns" => %w[kr_ret kr_yds kr_yds_ret kr_lng kr_td],
     "Punt Returns" => %w[pr_ret pr_fc pr_yds pr_yds_ret pr_lng pr_td]
   }.freeze
 
@@ -41,7 +41,7 @@ module PlayersHelper
 
   STAT_KEY_LABELS = {
     # Passing
-    "games" => "G",
+    "games" => "GAMES",
     "pass_att" => "ATT",
     "comp" => "COMP",
     "comp_pct" => "COMP%",
@@ -69,20 +69,25 @@ module PlayersHelper
     "rec_ypc" => "YPC",
     "rec_yac" => "YAC",
     "rec_long" => "LNG",
+    "rec_ypg" => "YPG",
     "rec_td" => "TD",
     "off_fumbles" => "FUM",
 
     # Defense
-    "tackles" => "COMB",
+    "tackles" => "TACKLES",
     "solo_tackles" => "SOLO",
-    "assist" => "AST",
+    "assist" => "ASSIST",
     "tackles_loss" => "TFL",
     "def_sacks" => "SACK",
+    "pass_def" => "PD",
     "def_fumble" => "FF",
+    "fumble_rec" => "FR",
     "def_int" => "INT",
     "def_td" => "TD",
 
     # Kicking
+    "fg_att" => "FGA",
+    "fg_made" => "FGM",
     "fg_1to19" => "1-19",
     "fg_20to29" => "20-29",
     "fg_30to39" => "30-39",
@@ -90,7 +95,7 @@ module PlayersHelper
     "fg_50to59" => "50-59",
     "fg_60Plus" => "60+",
     "xp_att" => "XPA",
-    "xo_made" => "XPM",
+    "xp_made" => "XPM",
 
     # Punting
     "punt" => "PUNTS",
@@ -98,10 +103,10 @@ module PlayersHelper
     "punt_in20" => "IN20",
     "pung_avg" => "AVG",
     "punt_lng" => "LNG",
+    "blocked" => "BLK",
 
     # Kick Returns
     "kr_ret" => "RET",
-    "kr_fc" => "FC",
     "kr_yds" => "YDS",
     "kr_yds_ret" => "AVG",
     "kr_lng" => "LNG",
